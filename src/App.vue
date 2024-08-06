@@ -85,8 +85,11 @@ const getHighlightedDocuments = computed(() => {
     const textNode = tempDiv.firstChild
     for (const highlight of docHighlights) {
       if (textNode) {
-        range.setStart(textNode, highlight.startOffset)
-        range.setEnd(textNode, highlight.endOffset)
+        const maxOffset = textNode.textContent?.length || 0
+        const adjustedStartOffset = Math.min(highlight.startOffset, maxOffset)
+        const adjustedEndOffset = Math.min(highlight.endOffset, maxOffset)
+        range.setStart(textNode, adjustedStartOffset)
+        range.setEnd(textNode, adjustedEndOffset)
         const markElement = document.createElement('mark')
         markElement.className = 'highlight'
         range.surroundContents(markElement)
