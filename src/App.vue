@@ -53,7 +53,6 @@ const selectedTextEndOffset = ref(0)
 
 const setSelectedText = (id: number) => {
   const selection = document.getSelection()
-  console.log(selection)
   if (selection && selection.rangeCount > 0) {
     const range = selection.getRangeAt(0)
     if (range && range.startOffset !== range.endOffset) {
